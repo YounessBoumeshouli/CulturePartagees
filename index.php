@@ -42,7 +42,7 @@ switch ($action) {
         break;
     case 'addArticle':
         addArticle();
-        break;
+        break; 
     case 'editArticle':
         editArticle();
         break;
