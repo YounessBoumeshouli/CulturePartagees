@@ -22,7 +22,7 @@ ob_start();
     </div>
     <div class="flex gap-2">
       <span class="px-3 py-1 text-xs font-bold rounded-full bg-[rgba(165,96,247,0.43)] text-[rgb(85,27,177)]">• Analytics</span>
-      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Dashboards</span>
+      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Ban</span>
     </div>
   </div>
 </article>
@@ -40,7 +40,7 @@ ob_start();
     </div>
     <div class="flex gap-2">
       <span class="px-3 py-1 text-xs font-bold rounded-full bg-[rgba(165,96,247,0.43)] text-[rgb(85,27,177)]">• Analytics</span>
-      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Dashboards</span>
+      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Ban</span>
     </div>
   </div>
 </article>
@@ -58,7 +58,7 @@ ob_start();
     </div>
     <div class="flex gap-2">
       <span class="px-3 py-1 text-xs font-bold rounded-full bg-[rgba(165,96,247,0.43)] text-[rgb(85,27,177)]">• Analytics</span>
-      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Dashboards</span>
+      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Ban</span>
     </div>
   </div>
 </article>
@@ -76,7 +76,7 @@ ob_start();
     </div>
     <div class="flex gap-2">
       <span class="px-3 py-1 text-xs font-bold rounded-full bg-[rgba(165,96,247,0.43)] text-[rgb(85,27,177)]">• Analytics</span>
-      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Dashboards</span>
+      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Ban</span>
     </div>
   </div>
 </article>
@@ -94,7 +94,7 @@ ob_start();
     </div>
     <div class="flex gap-2">
       <span class="px-3 py-1 text-xs font-bold rounded-full bg-[rgba(165,96,247,0.43)] text-[rgb(85,27,177)]">• Analytics</span>
-      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Dashboards</span>
+      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Ban</span>
     </div>
   </div>
 </article>
@@ -112,7 +112,7 @@ ob_start();
     </div>
     <div class="flex gap-2">
       <span class="px-3 py-1 text-xs font-bold rounded-full bg-[rgba(165,96,247,0.43)] text-[rgb(85,27,177)]">• Analytics</span>
-      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Dashboards</span>
+      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Ban</span>
     </div>
   </div>
 </article>
@@ -130,7 +130,7 @@ ob_start();
     </div>
     <div class="flex gap-2">
       <span class="px-3 py-1 text-xs font-bold rounded-full bg-[rgba(165,96,247,0.43)] text-[rgb(85,27,177)]">• Analytics</span>
-      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Dashboards</span>
+      <span class="px-3 py-1 text-xs font-bold rounded-full bg-[#b2b2fd] text-[#1a41cd]">• Ban</span>
     </div>
   </div>
 </article>

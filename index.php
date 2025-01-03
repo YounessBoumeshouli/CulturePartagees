@@ -13,6 +13,15 @@ switch ($action) {
     case 'inscriptionForm':
         inscriptionAction();
         break;
+    case 'login':
+        login();
+        break;
+    case 'SignUp':
+        SignUp();
+        break;
+    case 'registrationForm':
+        registrationAction();
+        break;
     case 'home':
         HomeViwe();
         break;
@@ -46,9 +55,18 @@ switch ($action) {
     case 'categoriesList':
         categoriesList();
         break;
+    case 'addCategorie':
+        addCategorie();
+        break;
+    case 'authorsList':
+        authorsList();
+        break;
+    case 'memebersList':
+        memebersList();
+        break;
    
     default:
-    inscriptionAction();     
+    echo "page not found";
     break;
 }
 ?>

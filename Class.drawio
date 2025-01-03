@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-02T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.6" type="device">
+  <diagram name="Page-1" id="class-diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Classes -->
+        <mxCell id="2" value="User&#10;# id: integer&#10;# nom: string&#10;# prénom: string&#10;# email: string&#10;# password: string&#10;# phone: string&#10;# role: string&#10;# registrationDate: date&#10;+ seConnecter(): void&#10;+ createUser(): void&#10;+ readUser(): void&#10;+ updateUser(): void&#10;+ deleteUser(): void&#10;+ validateEmail(): boolean&#10;+ validatePassword(): boolean" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=260;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="200" height="260" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="3" value="Member&#10;+ consulter(): void&#10;+ sInscrire(): void&#10;+ addComment(): void&#10;+ editComment(): void&#10;+ deleteComment(): void&#10;+ updateProfile(): void&#10;+ viewProfile(): void" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=160;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="360" width="200" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="4" value="Admin&#10;+ creerCategorie(): void&#10;+ deleteCategorie(): void&#10;+ consulterCategorie(): void&#10;+ validerArticle(): void&#10;+ refuserArticle(): void&#10;+ banUser(): void" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=140;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="360" width="200" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="5" value="Articles&#10;- id: integer&#10;- title: string&#10;- status: Status&#10;- description: string&#10;- content: string&#10;- catégorie: string&#10;- auteur: string&#10;- creationDate: date&#10;- modificationDate: date&#10;+ afficherArticle(): void" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=200;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="560" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="6" value="&lt;&lt;enumeration&gt;&gt;&#10;Status&#10;Draft&#10;Published&#10;Archived" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=100;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="600" y="560" width="160" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="7" value="Avis&#10;- idAvis: integer&#10;- React: string&#10;- Comment: string&#10;- Rating: float&#10;+ addAvis(): void&#10;+ editAvis(): void&#10;+ deleteAvis(): void" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=160;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="560" width="200" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="8" value="Catégorie&#10;- id: integer&#10;- nom: string&#10;- description: string&#10;+ afficherCategorie(): void&#10;+ nombreArticles(): void" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=120;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="600" y="700" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Inheritance Relationships -->
+        <mxCell id="9" value="" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="2">
+          <mxGeometry width="160" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="10" value="" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="4" target="2">
+          <mxGeometry width="160" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Associations -->
+        <mxCell id="11" value="0..N" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="5" target="8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="12" value="0..N" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="13" value="0..N" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="14" value="0..N" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

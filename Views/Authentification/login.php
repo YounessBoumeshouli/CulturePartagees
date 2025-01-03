@@ -42,7 +42,7 @@ ob_start();
           data-error="&lt;p&gt;Something went wrong. Please try again&lt;/p&gt;"
           data-success="&lt;p&gt;Thank you for your submission.&lt;/p&gt;"
           method="post"
-          action="/api/form/submit">
+          action="index.php?action=login">
           <div
             x-html=""
             :class="{'text-red-500': formStatus === 'ERROR', 'text-green-500': formStatus === 'SUCCESS'}"></div>
@@ -50,7 +50,7 @@ ob_start();
           <div class="mt-4 w-full">
             <input
               id="qqjnCu"
-              name="input"
+              name="email"
               class="focus:border-primary-400 focus:ring-primary-300 dark:focus:border-primary-300 mt-2 block w-full rounded-lg border bg-white px-4 py-2 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400"
               aria-label="Email Address"
               type="email"
@@ -59,7 +59,7 @@ ob_start();
           <div class="mt-4 w-full">
             <input
               id="wogrrc"
-              name="input"
+              name="password"
               class="focus:border-primary-400 focus:ring-primary-300 dark:focus:border-primary-300 mt-2 block w-full rounded-lg border bg-white px-4 py-2 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400"
               aria-label="Password"
               type="password"
@@ -70,8 +70,8 @@ ob_start();
               Forget Password?
             </a>
             <button
-              class="bg-primary-500 hover:bg-primary-400 focus:ring-primary-300 transform rounded-lg px-6 py-2 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-opacity-50"
-              type="button">
+              class="bg-primary-500 hover:bg-primary-400 focus:ring-primary-300 transform rounded-lg px-6 py-2 text-sm font-medium capitalize tracking-wide text-black transition-colors duration-300 focus:outline-none focus:ring focus:ring-opacity-50"
+              type="submit">
               <span>Sign In</span>
             </button>
           </div>
