@@ -39,15 +39,16 @@ require_once("Core/config/Database.php");
       return $result;
   }
     
-  public function UpdateProfile($id){
+  public function UpdateProfile($id,$imageData){
    $stmt = $this->pdo->prepare("UPDATE public.users
-SET  nom=:nom, prénom = :prenom, email=:email, password=:password, phone=:phone
+SET  nom=:nom, prénom = :prenom, email=:email, password=:password, phone=:phone ,profile_image = :profile_image
 WHERE id_user=:id");
    $stmt->bindParam(":nom",$this->nom);
    $stmt->bindParam(":prenom",$this->prenom);
    $stmt->bindParam(":email",$this->email);
    $stmt->bindParam(":password",$this->password);
    $stmt->bindParam(":phone",$this->phone);
+   $stmt->bindParam(":profile_image",$imageData,PDO::PARAM_LOB);
    $stmt->bindParam(":id",$id);
    $stmt->execute();
 

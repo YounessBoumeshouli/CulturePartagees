@@ -73,11 +73,12 @@ function editeProfile(){
     $email = $_POST["email"];
     $phone = $_POST["phone"];
     $password = $_POST["password"];
+    $imageData = file_get_contents($_FILES['image']['tmp_name']);
+    $mimeType = mime_content_type($_FILES['image']['tmp_name']);
     echo $nom,$prenom,$email,$phone;
     $id = $_SESSION["user"]["id_user"];
         $user = new User($nom, $prenom, $email, $password, $phone, null, null,Database::getConnection());
-     $user->UpdateProfile($id);
-    require_once("Views/Author/settings.php");
+     $user->UpdateProfile($id,$imageData);
     
 }
 function editArticleAction(){

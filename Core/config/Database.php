@@ -2,7 +2,7 @@
 
 class Database
 {
-    private static $dsn = "pgsql:host=localhost;port=5432;dbname=cultures;";
+    private static $dsn = "pgsql:host=localhost;port=5432;dbname=cultures;options='--client_encoding=UTF8'";
     private static $user = "postgres";
     private static $password = "Youness";
     private static $pdo = null;

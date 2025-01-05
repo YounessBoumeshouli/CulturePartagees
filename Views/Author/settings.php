@@ -1,8 +1,25 @@
 <?php
 $title = "settings";
 ob_start();
+$imageType = isset($result['mime_type']) ? $result['mime_type'] : 'image/jpeg'; 
+$imageData = isset($result['profile_image']) ? $result['profile_image'] : null;
+if (empty($imageData)) {
+    echo "No image data found!";
+}
+if ($imageData) {
+    if (is_resource($imageData)) {
+        $imageData = stream_get_contents($imageData);
+    }
+    
+    $imageDataEncoded = base64_encode($imageData);
+    $imageSrc = 'data:' . $imageType . ';base64,' . $imageDataEncoded; 
+} else {
+    
+    $imageSrc = 'path/to/default/image.jpg';
+}
 ?>
-<form action="index.php?action=updateProfile" method="post">
+?>
+<form action="index.php?action=updateProfile" method="post" enctype="multipart/form-data">
   <section class="min-h-screen bg-white dark:bg-gray-900">
     <div class="container mx-auto px-6">
       <div class="lg:-mx-10 lg:flex lg:items-center">
@@ -92,8 +109,10 @@ ob_start();
         </div>
 
         <div class="relative" id="imageContainer">
+          
+ 
   <img id="profileImage" 
-    src="https://images.unsplash.com/photo-1598257006458-087169a1f08d" 
+    src="<?=$imageSrc?>" 
     class="h-96 w-96 rounded-full object-cover" 
     alt="Profile">
   <div onclick="toggleEdit()" 
@@ -106,7 +125,7 @@ ob_start();
 </div>
 <div class="hidden relative" id="uploadContainer">
   <div class="border-2 border-dashed border-gray-300 rounded-full h-96 w-96 flex flex-col items-center justify-center">
-    <input type="file" id="fileInput" class="hidden" accept="image/*" onchange="handleFileChange(this)">
+    <input type="file" id="fileInput" class="hidden" name="image" accept="image/*" onchange="handleFileChange(this)">
     <label for="fileInput" class="cursor-pointer">
       <div class="text-center">
         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -118,12 +137,12 @@ ob_start();
     </label>
   </div>
   
-  <button onclick="toggleEdit()" 
+  <div onclick="toggleEdit()" 
     class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100">
     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
     </svg>
-  </button>
+  </div>
 </div>
 
 
