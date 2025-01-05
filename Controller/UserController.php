@@ -24,17 +24,19 @@ function ArticleView(){
     require_once("Views/Membre/article.php");
 }
 function ProfileView(){
-    $id = $_SESSION["user"]['id_user'];
-    $user = new User(null, null, null, null, null, null, null,Database::getConnection());
+    $id = $_SESSION["user"]["id_user"];
+    $user = new User(null, null, null, null, null, null, null,null);
     $result = $user->viewProfile($id);
-    require_once("Views/Membre/profile.php");
+    $dir  = $_SESSION['user']['role'];
+    $dir[0] = strtoupper($dir[0]);
+    require_once("Views/$dir/profile.php");
 }
 function SettingsView(){
-    require_once("Views/Membre/settings.php");
+    $dir  = $_SESSION['user']['role'];
+    $dir[0] = strtoupper($dir[0]);
+    require_once("Views/$dir/settings.php");
 }
-function AuthorSettingsView(){
-    require_once("Views/Author/settings.php");
-}
+
 function likedArticles(){
     require_once("Views/Membre/likedArticles.php");
 }

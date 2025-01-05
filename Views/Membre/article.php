@@ -1,7 +1,6 @@
 <?php
 $title = "article";
 ob_start();
-var_dump($result);
 ?>
 <body class="font-body antialiased">
   <div class="flex justify-center" >

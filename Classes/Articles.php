@@ -15,13 +15,13 @@ class Articles {
         $this->pdo = Database::getConnection();
     }
     public function afficherArticles(){
-        $stmt = $this->pdo->query("select * from articles a inner join users u on a.auteur_id = u.id_user  where status = 'accepted' ");
+        $stmt = $this->pdo->query("select * from articles a inner join users u on a.auteur_id = u.id_user  where a.status = 'accepted' ");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
     public function afficherArticle($id){
-        $stmt = $this->pdo->prepare("select * from public.articles a left join public.users u on a.auteur_id = u.id_user left join categories c on a.categorie_id = c.id_categorie where status = 'accepted' and a.id_article = :id ");
+        $stmt = $this->pdo->prepare("select * from public.articles a left join public.users u on a.auteur_id = u.id_user left join categories c on a.categorie_id = c.id_categorie where a.status = 'accepted' and a.id_article = :id ");
         $stmt->bindParam(":id",$id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);

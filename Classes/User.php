@@ -32,9 +32,11 @@ require_once("Core/config/Database.php");
        return $result;
     }
     public function viewProfile($id){
-      $stmt = $this->pdo->prapare("SELECT * from public.users where id = :id");
-      $stmt->bindParam(":id",$id);
+      $stmt = $this->pdo->prepare("SELECT u.* , count(v.article_id) as comments , count(a.auteur_id) as articles   from users u left join articles a  on a.auteur_id = u.id_user left join avis v on v.article_id = a.id_article where id_user = :id_user  group by u.id_user ");
+      $stmt->bindParam(":id_user",$id);
+      $stmt->execute();
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $result;
   }
     
 
