@@ -34,15 +34,32 @@ class Admin extends User{
         $stmt->execute();
 
     }
-    public function banUser($id){
-        $stmt = $this->pdo->perpare("UPDATE public.avis set  where id =:id ");
-        $stmt->bindParam(":article_id",$id);
-        $stmt->execute();
+    public function ChangeStatus($id){
+        $search = $this->pdo->prepare("SELECT * from public.users   where id_user =:id_user ");
+        $search->bindParam(":id_user",$id);
+        $search->execute();
+       if( $result = $search->fetch(PDO::FETCH_ASSOC)){
+        if($result["status"] == "safe"){
+            $status = "baned";
+            $stmt = $this->pdo->prepare("UPDATE public.users set status = :status  where id_user =:id_user ");
+            $stmt->bindParam(":status",$status);
+            $stmt->bindParam(":id_user",$id);
+            $stmt->execute();
+        }else{
+            $status = "safe";
+            $stmt = $this->pdo->prepare("UPDATE public.users set status = :status  where id_user =:id_user ");
+            $stmt->bindParam(":status",$status);
+            $stmt->bindParam(":id_user",$id);
+            $stmt->execute();
+        }
+        
+       }
+       
 
     }
     public function AcceptArticlebyID($id,$status){
   
-        $stmt = $this->pdo->prepare("UPDATE public.articles SET status=:status WHERE id = :id");
+        $stmt = $this->pdo->prepare("UPDATE public.articles SET status=:status WHERE id_article = :id");
         $stmt->bindParam(":status",$status);
         $stmt->bindParam(":id",$id);
         $stmt->execute();
@@ -51,7 +68,7 @@ class Admin extends User{
     }
     public function ReffuseArticlebyID($id,$status){
   
-        $stmt = $this->pdo->prepare("UPDATE public.articles SET status=:status WHERE id = :id");
+        $stmt = $this->pdo->prepare("UPDATE public.articles SET status=:status WHERE id_article = :id");
         $stmt->bindParam(":status",$status);
         $stmt->bindParam(":id",$id);
         $stmt->execute();

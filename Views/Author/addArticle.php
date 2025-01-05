@@ -207,12 +207,12 @@ foreach ($categories as $categorie) {
         </g>
       </svg>
     </div>
-    <?=$categorie["nom"]?>
+    <?=$categorie["label"]?>
     <input
       checked=""
       type="radio"
       name="categorie"
-      value = <?=$categorie["id"]?>
+      value = <?=$categorie["id_categorie"]?>
       class="peer/html w-4 h-4 absolute accent-current right-3"
       id="html"
     />

@@ -85,6 +85,9 @@ switch ($action) {
     case 'addComment':
         addComment();
         break;
+    case 'changestatus':
+        changestatus();
+        break;
    
     default:
     echo "page not found";

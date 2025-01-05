@@ -13,6 +13,7 @@ class Membre extends User{
     }
 
     public function Inscription(){
+        $date = date("Y-m-d");
         $stmt = $this->pdo->prepare("INSERT INTO public.users(
 	 nom, prénom, email, password, phone, role, registrationdate)
 	VALUES ( :nom, :prenom,:email ,:password, :phone, :role, :registrationdate);");
@@ -22,7 +23,7 @@ class Membre extends User{
     $stmt->bindParam(":password",$this->password);
     $stmt->bindParam(":phone",$this->phone);
     $stmt->bindParam(":role",$this->role);
-    $stmt->bindParam(":registrationdate",date("Y-m-d"));
+    $stmt->bindParam(":registrationdate",$date);
     $stmt->execute();
     echo "is succes";
     }
@@ -81,10 +82,6 @@ class Membre extends User{
 
     }
 
-    public function viewProfile($id){
-        $stmt = $this->pdo->prapare("SELECT * from public.users where id = :id");
-        $stmt->bindParam(":id",$id);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    
     
 }

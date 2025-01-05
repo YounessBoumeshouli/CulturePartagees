@@ -25,30 +25,37 @@ class Author extends Membre{
         $stmt = $this->pdo->prepare("UPDATE  public.articles
 	    
 	SET title =  :title,description = :description ,content = :content, categorie_id = :categorie_id,
-    modificationdate = :modificationdate where id = :id");
+    modificationdate = :modificationdate where id_article = :id_article");
            $stmt->bindParam(":title",$title);
            $stmt->bindParam(":description",$description);
            $stmt->bindParam(":content",$content);
            $stmt->bindParam(":categorie_id",$categorie_id);
            $stmt->bindParam(":modificationdate",$modificationdate);
-           $stmt->bindParam(":id",$id);
+           $stmt->bindParam(":id_article",$id);
            $stmt->execute();
 
     }
     public function DeleteArticle($id){
         $stmt = $this->pdo->prepare("DELETE from  public.articles
-	where id = :id");
-           $stmt->bindParam(":id",$id);
+	where id_article = :id_article");
+           $stmt->bindParam(":id_article",$id);
            $stmt->execute();
 
     }
     public function SelectArticle($id){
         $stmt = $this->pdo->prepare("SELECT * from  public.articles
-	where id = :id");
-           $stmt->bindParam(":id",$id);
+	where id_article = :id_article");
+           $stmt->bindParam(":id_article",$id);
            $stmt->execute();
            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-           var_dump($result);
+           return $result;
+    }
+    public function SelectUsersByRole($role){
+        $stmt = $this->pdo->prepare("SELECT * from  public.users
+	where role = :role ");
+           $stmt->bindParam(":role",$role);
+           $stmt->execute();
+           $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
            return $result;
     }
     public function SelectArticlebyAuthor($id){

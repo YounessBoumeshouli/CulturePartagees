@@ -31,7 +31,11 @@ require_once("Core/config/Database.php");
        $result = $stmt->fetch(PDO::FETCH_ASSOC);
        return $result;
     }
-
+    public function viewProfile($id){
+      $stmt = $this->pdo->prapare("SELECT * from public.users where id = :id");
+      $stmt->bindParam(":id",$id);
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  }
     
 
  }

@@ -173,7 +173,7 @@ var_dump($article);
     </span>
   </div>
   <section>
-<form method="post" action="index.php?action=editArticleAction&idArticle=<?=$article['id']?>">   <div class="container mx-auto px-6 py-10">
+<form method="post" action="index.php?action=editArticleAction&idArticle=<?=$article['id_article']?>">   <div class="container mx-auto px-6 py-10">
       <h2 class="text-3xl font-semibold capitalize text-gray-800 lg:text-4xl dark:text-white">From the blog</h2>
     </div>
 <div
@@ -208,13 +208,13 @@ foreach ($categories as $categorie) {
         </g>
       </svg>
     </div>
-    <?=$categorie["nom"]?>
+    <?=$categorie["label"]?>
     <input
       checked=""
       type="radio"
       name="categorie"
-      value = <?=$categorie["id"]?>
-      <?=$categorie["id"] == $article["categorie_id"] ? 'selected' : '' ?>
+      value = <?=$categorie["id_categorie"]?>
+      <?=$categorie["id_categorie"] == $article["categorie_id"] ? 'selected' : '' ?>
       class="peer/html w-4 h-4 absolute accent-current right-3"
       id="html"
     />
@@ -337,9 +337,9 @@ foreach ($categories as $categorie) {
        </div>
    </div>
    <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-       Publish post
+       Update post
    </button>
-   <a href ="index.php?action=deleteArticle&id=<?=$article["id"]?>" type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+   <a href ="index.php?action=deleteArticle&id=<?=$article["id_article"]?>" type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
        Delete post
    </button>
 </form>

@@ -24,6 +24,9 @@ function ArticleView(){
     require_once("Views/Membre/article.php");
 }
 function ProfileView(){
+    $id = $_SESSION["user"]['id_user'];
+    $user = new User(null, null, null, null, null, null, null,Database::getConnection());
+    $result = $user->viewProfile($id);
     require_once("Views/Membre/profile.php");
 }
 function SettingsView(){
@@ -48,7 +51,7 @@ if(isset($_POST["content"],$_POST["title"],$_POST["categorie"])){
    $title =  $_POST["title"];
    $categorie =  $_POST["categorie"];
     $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
-    $Author->addArticle($categorie,$title,$content,$_SESSION["user"]["id"]);
+    $Author->addArticle($categorie,$title,$content,$_SESSION["user"]["id_user"]);
 }
 }
 function editeArticle(){
@@ -72,7 +75,7 @@ function editArticleAction(){
 }
 function myArticles(){
     $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
-    $articles = $Author->SelectArticlebyAuthor($_SESSION["user"]["id"]);
+    $articles = $Author->SelectArticlebyAuthor($_SESSION["user"]["id_user"]);
     require_once("Views/Author/articles.php");
 }
 function articles(){
@@ -80,7 +83,7 @@ function articles(){
 }
 function articleList(){
     $articles = new Articles(Database::getConnection());
-    $status = "checked";
+    $status = 'checked';
     $result =  $articles->afficherArticlesBystatus($status);
     require_once("Views/Admin/articlesList.php");
 }
@@ -90,9 +93,16 @@ function categoriesList(){
     require_once("Views/Admin/categoriesList.php");
 }
 function authorsList(){
+    $role = "Author";
+    $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
+    $result = $Author->SelectUsersByRole($role);
     require_once("Views/Admin/AuthorsList.php");
 }
+
 function memebersList(){
+    $role = "Membre";
+    $Membre = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
+    $result = $Membre->SelectUsersByRole($role);
     require_once("Views/Admin/MemebersList.php");
 }
 function login(){
@@ -169,4 +179,11 @@ function addComment(){
     $id_article = $_GET["id_article"];
     $id = $_SESSION['user']['id_user'];
     $membre->addComment($id , $comment , $id_article,$reaction);
+}
+
+
+function changestatus(){   
+    $id = $_GET["id_membre"]; 
+    $admin = new Admin($_SESSION['user']['nom'],$_SESSION['user']['prénom'],$_SESSION['user']['email'],$_SESSION['user']['password'],$_SESSION['user']["phone"],null,$_SESSION['user']["registrationdate"],null);
+    $admin->ChangeStatus($id);
 }
