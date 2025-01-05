@@ -22,7 +22,7 @@ ob_start();
         </svg>
       </span>
     </span>
-    <a href="index.php?action=addartilce" class="-px-2 flex items-center text-gray-600 hover:underline dark:text-gray-200">
+    <a href="index.php?action=addArticle" class="-px-2 flex items-center text-gray-600 hover:underline dark:text-gray-200">
       <span class="w-24px h-24px mx-2 h-6 w-6">
         <svg
           class="w-[inherit] h-[inherit]"

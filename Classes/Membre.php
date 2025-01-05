@@ -1,5 +1,5 @@
 <?php
-include("User.php");
+require_once("User.php");
 
 class Membre extends User{
     public function __construct( $nom, $prenom, $email, $password, $phone, $role, $registrationDate,$pdo) {
@@ -50,13 +50,14 @@ class Membre extends User{
         $stmt->execute();
 
     }
-    public function addComment($id , $comment , $article){
-        $stmt = $this->pdo->perpare("INSERT INTO public.avis(
+    public function addComment($membre_id , $comment , $article_id,$reaction){
+        $react = 5;
+        $stmt = $this->pdo->prepare("INSERT INTO public.avis(
 	react, comment, rating, article_id , membre_id)
 	VALUES (:react, :comment, :rating, :article_id , :membre_id)");
-        $stmt->bindParam(":react",$react);
+        $stmt->bindParam(":react",$reaction);
         $stmt->bindParam(":comment",$comment);
-        $stmt->bindParam(":rating",$rating);
+        $stmt->bindParam(":rating",$react);
         $stmt->bindParam(":article_id",$article_id);
         $stmt->bindParam(":membre_id",$membre_id);
         $stmt->execute();

@@ -2,6 +2,9 @@
 
 include("Classes/Admin.php");
 include("Classes/Categories.php");
+include("Classes/Author.php");
+include("Classes/Articles.php");
+include("Classes/Avis.php");
 session_start();
 function inscriptionAction(){
     require_once("Views/Authentification/login.php");
@@ -13,6 +16,11 @@ function HomeViwe(){
     require_once("Views/Membre/home.php");
 }
 function ArticleView(){
+    $id = $_GET["id"];
+    $article = new Articles(Database::getConnection());
+    $avis = new Avis(Database::getConnection());
+    $result = $article->afficherArticle($id);
+    $Avis = $avis->afficherAvis($id);
     require_once("Views/Membre/article.php");
 }
 function ProfileView(){
@@ -28,15 +36,52 @@ function likedArticles(){
     require_once("Views/Membre/likedArticles.php");
 }
 function addArticle(){
+
+    $categorie = new Categories(Database::getConnection());
+    $categories= $categorie->afficherCategories();
     require_once("Views/Author/addArticle.php");
 }
-function editArticle(){
+function ajouterArticleAction(){
+    echo "hola";
+if(isset($_POST["content"],$_POST["title"],$_POST["categorie"])){
+   $content =  $_POST["content"];
+   $title =  $_POST["title"];
+   $categorie =  $_POST["categorie"];
+    $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
+    $Author->addArticle($categorie,$title,$content,$_SESSION["user"]["id"]);
+}
+}
+function editeArticle(){
+    $categorie = new Categories(Database::getConnection());
+    $categories= $categorie->afficherCategories();
+    $id =  $_GET["idArticle"];
+    $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
+    $article = $Author->SelectArticle($id);
     require_once("Views/Author/editeArticle.php");
+}
+function editArticleAction(){
+    $id =  $_GET["idArticle"];
+        echo "hello";
+        $title = $_POST["title"];
+        $description = $_POST["description"];
+        $content = $_POST["content"];
+        $categorie_id = $_POST["categorie"];
+        $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
+    $article = $Author->EditArticle($id,$title,$description,$content,$categorie_id);
+    
+}
+function myArticles(){
+    $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
+    $articles = $Author->SelectArticlebyAuthor($_SESSION["user"]["id"]);
+    require_once("Views/Author/articles.php");
 }
 function articles(){
     require_once("Views/Author/articles.php");
 }
 function articleList(){
+    $articles = new Articles(Database::getConnection());
+    $status = "checked";
+    $result =  $articles->afficherArticlesBystatus($status);
     require_once("Views/Admin/articlesList.php");
 }
 function categoriesList(){
@@ -65,6 +110,17 @@ function login(){
     
     }
 }
+function homePage(){
+       
+        $articles = new Articles(Database::getConnection());
+        $result =  $articles->afficherArticles("accepted");
+        echo "hello";
+      $dir  = $_SESSION['user']['role'];
+      $dir[0] = strtoupper($dir[0]);
+        require_once("Views/$dir/home.php");
+    
+    
+}
 function SignUp(){
     if(isset($_POST["name"])){
         $email = $_POST["email"];
@@ -84,4 +140,33 @@ function addCategorie(){
        $admin = new Admin($_SESSION['user']['nom'],$_SESSION['user']['prénom'],$_SESSION['user']['email'],$_SESSION['user']['password'],$_SESSION['user']["phone"],null,$_SESSION['user']["registrationdate"],null);
        $admin->creeCategorie($categorie);
     }
+}
+function deleteArticle(){
+    if(isset($_GET["id"])){
+        $id = $_GET["id"];
+        $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
+        $Author-> DeleteArticle($id);
+    }
+}
+function acceptArticle(){
+    if(isset($_GET["idArticle"])){
+        $id = $_GET["idArticle"];
+        $admin = new Admin($_SESSION['user']['nom'],$_SESSION['user']['prénom'],$_SESSION['user']['email'],$_SESSION['user']['password'],$_SESSION['user']["phone"],null,$_SESSION['user']["registrationdate"],null);
+        $admin-> AcceptArticlebyID($id,"accepted");
+    }
+}
+function reffuseArticle(){
+    if(isset($_GET["idArticle"])){
+        $id = $_GET["idArticle"];
+        $admin = new Admin($_SESSION['user']['nom'],$_SESSION['user']['prénom'],$_SESSION['user']['email'],$_SESSION['user']['password'],$_SESSION['user']["phone"],null,$_SESSION['user']["registrationdate"],null);
+        $admin-> ReffuseArticlebyID($id,"refused");
+    }
+}
+function addComment(){
+    $membre  = new Membre( $_SESSION['user']['nom'],$_SESSION['user']['prénom'],$_SESSION['user']['email'],$_SESSION['user']['password'],$_SESSION['user']["phone"],null,$_SESSION['user']["registrationdate"],null);
+    $comment = $_POST["comment"];
+    $reaction = $_POST["reaction"];
+    $id_article = $_GET["id_article"];
+    $id = $_SESSION['user']['id_user'];
+    $membre->addComment($id , $comment , $id_article,$reaction);
 }

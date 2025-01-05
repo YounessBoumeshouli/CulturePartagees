@@ -1,5 +1,5 @@
 <?php
-include("User.php");
+require_once("User.php");
 
 class Admin extends User{
     public function __construct($nom, $prenom, $email, $password, $phone, $role, $registrationDate,$pdo) {
@@ -40,6 +40,23 @@ class Admin extends User{
         $stmt->execute();
 
     }
-
+    public function AcceptArticlebyID($id,$status){
+  
+        $stmt = $this->pdo->prepare("UPDATE public.articles SET status=:status WHERE id = :id");
+        $stmt->bindParam(":status",$status);
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function ReffuseArticlebyID($id,$status){
+  
+        $stmt = $this->pdo->prepare("UPDATE public.articles SET status=:status WHERE id = :id");
+        $stmt->bindParam(":status",$status);
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     
 }

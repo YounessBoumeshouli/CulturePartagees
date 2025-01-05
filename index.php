@@ -23,9 +23,9 @@ switch ($action) {
         registrationAction();
         break;
     case 'home':
-        HomeViwe();
+        homePage();
         break;
-    case 'article':
+    case 'selectArticle':
         ArticleView();
         break;
     case 'profile':
@@ -43,13 +43,25 @@ switch ($action) {
     case 'addArticle':
         addArticle();
         break; 
-    case 'editArticle':
-        editArticle();
+    case 'editeArticle':
+        editeArticle();
+        break;
+    case 'editArticleAction':
+        editArticleAction();
+        break;
+    case 'deleteArticle':
+        deleteArticle();
+        break;
+    case 'acceptArticle':
+        acceptArticle();
+        break;
+    case 'reffuseArticle':
+        reffuseArticle();
         break;
     case 'articles':
         articles();
         break;
-    case 'articleList':
+    case 'ArticlesList':
         articleList();
         break;
     case 'categoriesList':
@@ -63,6 +75,15 @@ switch ($action) {
         break;
     case 'memebersList':
         memebersList();
+        break;
+    case 'ajouterArticle':
+        ajouterArticleAction();
+        break;
+    case 'myArticles':
+        myArticles();
+        break;
+    case 'addComment':
+        addComment();
         break;
    
     default:

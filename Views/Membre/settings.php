@@ -4,7 +4,7 @@ ob_start();
 ?>
 <body class="font-body antialiased">
   <div class="flex items-center overflow-x-auto whitespace-nowrap py-4 ml-8">
-    <a href="#" class="text-gray-600 dark:text-gray-200">
+    <a href="index.php?action=home" class="text-gray-600 dark:text-gray-200">
       <span class="w-24px h-24px h-5 w-5">
         <svg class="w-[inherit] h-[inherit]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path

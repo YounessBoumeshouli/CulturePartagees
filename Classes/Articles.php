@@ -1,5 +1,5 @@
 <?php
-require("Core/config/Database.php");
+require_once("Core/config/Database.php");
 class Articles {
     private $id;
     private $title;
@@ -11,21 +11,29 @@ class Articles {
     private $id_auteur;
     private $pdo;
     
-    public function __construct($id,$title,$status,$description,$content,$modificationDate,$creationDate,$id_auteur,$pdo){
-        $this->id = $id;
-        $this->title = $title;
-        $this->status = $status;
-        $this->description = $description;
-        $this->content = $content;
-        $this->modificationDate = $modificationDate;
-        $this->creationDate = $creationDate;
-        $this->id_auteur = $id_auteur;
+    public function __construct($pdo){
         $this->pdo = Database::getConnection();
     }
     public function afficherArticles(){
-        $stmt = $this->pdo->query("select * from public.articles");
+        $stmt = $this->pdo->query("select * from articles a inner join users u on a.auteur_id = u.id_user  where status = 'accepted' ");
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function afficherArticle($id){
+        $stmt = $this->pdo->prepare("select * from public.articles a left join public.users u on a.auteur_id = u.id_user left join categories c on a.categorie_id = c.id_categorie where status = 'accepted' and a.id_article = :id ");
+        $stmt->bindParam(":id",$id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
+    public function afficherArticlesBystatus($status){
+  
+        $stmt = $this->pdo->prepare("SELECT * from public.articles WHERE status=:status");
+        $stmt->bindParam(":status",$status);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
 }

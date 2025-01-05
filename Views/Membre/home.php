@@ -151,6 +151,11 @@ ob_start();
         </p>
       </div>
       <div class="mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
+        <?php
+    foreach ($result as $row) {
+      # code...
+   
+        ?>
         <div>
           <div class="relative">
             <img
@@ -174,119 +179,18 @@ ob_start();
               </div>
             </div>
           </div>
-          <h2 class="mt-6 text-xl font-semibold text-gray-800 dark:text-white">What do you want to know about UI</h2>
+          <h2 class="mt-6 text-xl font-semibold text-gray-800 dark:text-white"><?=$row["title"]?></h2>
           <hr class="text-primary-500 my-6 w-32" />
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis fugit dolorum amet dolores praesentium,
-            alias nam? Tempore
+          <?=$row["description"]?>
           </p>
-          <a class="text-primary-500 hover:text-primary-400 mt-4 inline-block underline" href="#" target="_self">
+          <a class="text-primary-500 hover:text-primary-400 mt-4 inline-block underline" href="index.php?action=selectArticle&id=<?=$row["id_article"]?>" target="_self">
             Read more
           </a>
         </div>
-        <div>
-          <div class="relative">
-            <img
-              class="h-64 w-full rounded object-cover object-center lg:h-80"
-              src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&amp;amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;amp;auto=format&amp;amp;fit=crop&amp;amp;w=1470&amp;amp;q=80"
-              alt=""
-              loading="lazy"
-              height=""
-              width="" />
-            <div class="absolute bottom-0 flex bg-white p-3 dark:bg-gray-900">
-              <img
-                class="h-10 w-10 rounded-full object-cover object-center"
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&amp;amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;amp;auto=format&amp;amp;fit=crop&amp;amp;w=880&amp;amp;q=80"
-                alt=""
-                loading="lazy"
-                height=""
-                width="" />
-              <div class="mx-4">
-                <h2 class="text-sm text-gray-700 dark:text-gray-200">arthur melo</h2>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Creative Director</p>
-              </div>
-            </div>
-          </div>
-          <h2 class="mt-6 text-xl font-semibold text-gray-800 dark:text-white">All the features you want to know</h2>
-          <hr class="text-primary-500 my-6 w-32" />
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis fugit dolorum amet dolores praesentium,
-            alias nam? Tempore
-          </p>
-          <a class="text-primary-500 hover:text-primary-400 mt-4 inline-block underline" href="#" target="_self">
-            Read more
-          </a>
-        </div>
-        <div>
-          <div class="relative">
-            <img
-              class="h-64 w-full rounded object-cover object-center lg:h-80"
-              src="https://images.unsplash.com/photo-1597534458220-9fb4969f2df5?ixlib=rb-1.2.1&amp;amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;amp;auto=format&amp;amp;fit=crop&amp;amp;w=1374&amp;amp;q=80"
-              alt=""
-              loading="lazy"
-              height=""
-              width="" />
-            <div class="absolute bottom-0 flex bg-white p-3 dark:bg-gray-900">
-              <img
-                class="h-10 w-10 rounded-full object-cover object-center"
-                src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&amp;amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;amp;auto=format&amp;amp;fit=crop&amp;amp;w=764&amp;amp;q=80"
-                alt=""
-                loading="lazy"
-                height=""
-                width="" />
-              <div class="mx-4">
-                <h2 class="text-sm text-gray-700 dark:text-gray-200">Amelia. Anderson</h2>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Lead Developer</p>
-              </div>
-            </div>
-          </div>
-          <h2 class="mt-6 text-xl font-semibold text-gray-800 dark:text-white">
-            Which services you get from Meraki UI
-          </h2>
-          <hr class="text-primary-500 my-6 w-32" />
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis fugit dolorum amet dolores praesentium,
-            alias nam? Tempore
-          </p>
-          <a class="text-primary-500 hover:text-primary-400 mt-4 inline-block underline" href="#" target="_self">
-            Read more
-          </a>
-        </div>
-        <div>
-          <div class="relative">
-            <img
-              class="h-64 w-full rounded object-cover object-center lg:h-80"
-              src="https://images.unsplash.com/photo-1597534458220-9fb4969f2df5?ixlib=rb-1.2.1&amp;amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;amp;auto=format&amp;amp;fit=crop&amp;amp;w=1374&amp;amp;q=80"
-              alt=""
-              loading="lazy"
-              height=""
-              width="" />
-            <div class="absolute bottom-0 flex bg-white p-3 dark:bg-gray-900">
-              <img
-                class="h-10 w-10 rounded-full object-cover object-center"
-                src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&amp;amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;amp;auto=format&amp;amp;fit=crop&amp;amp;w=764&amp;amp;q=80"
-                alt=""
-                loading="lazy"
-                height=""
-                width="" />
-              <div class="mx-4">
-                <h2 class="text-sm text-gray-700 dark:text-gray-200">Amelia. Anderson</h2>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Lead Developer</p>
-              </div>
-            </div>
-          </div>
-          <h2 class="mt-6 text-xl font-semibold text-gray-800 dark:text-white">
-            Which services you get from Meraki UI
-          </h2>
-          <hr class="text-primary-500 my-6 w-32" />
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis fugit dolorum amet dolores praesentium,
-            alias nam? Tempore
-          </p>
-          <a class="text-primary-500 hover:text-primary-400 mt-4 inline-block underline" href="#" target="_self">
-            Read more
-          </a>
-        </div>
+     <?php
+                              }
+     ?>
       </div>
     </div>
   </section>

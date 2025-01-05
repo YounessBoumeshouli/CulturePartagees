@@ -1,6 +1,7 @@
 <?php
 $title = "add Articles";
 ob_start();
+var_dump($article);
 ?>
 <body class="font-body antialiased">
   <div class="flex items-center overflow-x-auto whitespace-nowrap py-4 ml-8">
@@ -129,20 +130,67 @@ ob_start();
       </button>
       <span class="mx-2">Upload</span>
     </a>
+    <span class="mx-5 text-gray-500 rtl:-scale-x-100 dark:text-gray-300">
+      <span class="w-24px h-24px h-5 w-5">
+        <svg class="w-[inherit] h-[inherit]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </span>
+    </span>
+    <a href="index.php?action=myArticles" class="text-primary-600 -px-2 dark:text-primary-400 flex items-center hover:underline">
+      <button
+        class="px-4 py-2 font-medium text-gray-600 transition-colors duration-200 hover:bg-gray-100 sm:px-6 dark:text-gray-300 dark:hover:bg-gray-800"
+        type="button">
+        <span class="w-24px h-24px h-5 w-5 sm:h-6 sm:w-6">
+          <svg
+            class="w-[inherit] h-[inherit]"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"></path>
+          </svg>
+        </span>
+      </button>
+      <span class="mx-2">My Articles</span>
+    </a>
+    <span class="mx-5 text-gray-500 rtl:-scale-x-100 dark:text-gray-300">
+      <span class="w-24px h-24px h-5 w-5">
+        <svg class="w-[inherit] h-[inherit]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </span>
+    </span>
   </div>
   <section>
-<form>   <div class="container mx-auto px-6 py-10">
+<form method="post" action="index.php?action=editArticleAction&idArticle=<?=$article['id']?>">   <div class="container mx-auto px-6 py-10">
       <h2 class="text-3xl font-semibold capitalize text-gray-800 lg:text-4xl dark:text-white">From the blog</h2>
     </div>
 <div
   class="w-[300px] px-4 py-5 bg-white flex flex-col gap-3 rounded-md shadow-[0px_0px_15px_rgba(0,0,0,0.09)]"
 >
   <legend class="text-xl font-semibold mb-3 select-none">Choose One</legend>
+  <?php
+foreach ($categories as $categorie) {
+  # code...
+
+  ?>
   <label
     for="html"
     name="status"
     class="font-medium h-14 relative hover:bg-zinc-100 flex items-center px-3 gap-3 rounded-lg has-[:checked]:text-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:ring-blue-300 has-[:checked]:ring-1 select-none"
   >
+  
     <div class="w-5 fill-blue-500">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -160,71 +208,20 @@ ob_start();
         </g>
       </svg>
     </div>
-    HTML
+    <?=$categorie["nom"]?>
     <input
       checked=""
       type="radio"
-      name="status"
+      name="categorie"
+      value = <?=$categorie["id"]?>
+      <?=$categorie["id"] == $article["categorie_id"] ? 'selected' : '' ?>
       class="peer/html w-4 h-4 absolute accent-current right-3"
       id="html"
     />
   </label>
-  <label
-    for="css"
-    class="font-medium h-14 relative hover:bg-zinc-100 flex items-center px-3 gap-3 rounded-lg has-[:checked]:text-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:ring-blue-300 has-[:checked]:ring-1 select-none"
-  >
-    <div class="w-5">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-        role="img"
-      >
-        <path
-          d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"
-        ></path>
-      </svg>
-    </div>
-    CSS
-    <input
-      type="radio"
-      name="status"
-      class="w-4 h-4 absolute accent-current right-3"
-      id="css"
-    />
-  </label>
-  <label
-    for="javascript"
-    name="html"
-    class="font-medium h-14 relative hover:bg-zinc-100 flex items-center px-3 gap-3 rounded-lg has-[:checked]:text-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:ring-blue-300 has-[:checked]:ring-1 select-none"
-  >
-    <div class="w-5">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        fill="currentColor"
-        version="1.1"
-        viewBox="0 0 512 512"
-        xml:space="preserve"
-      >
-        <g id="5151e0c8492e5103c096af88a51e75c7">
-          <path
-            display="inline"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M1.008,0.5C0.438,0.583,0.48,1.27,0.521,1.958   c0,169.668,0,339.31,0,508.974c169.364,1.135,340.808,0.162,510.979,0.486c0-170.309,0-340.61,0-510.918   C341.342,0.5,171.167,0.5,1.008,0.5z M259.893,452.167c-11.822,11.919-30.478,18.938-53.429,18.938   c-37.643,0-58.543-18.34-71.884-43.711c12.842-8.2,25.966-16.122,39.344-23.795c5.456,15.262,23.886,32.42,44.683,21.857   c13.183-6.699,11.661-27.01,11.661-49.054c0-45.773,0-98.578,0-139.872c-0.042-0.688-0.083-1.375,0.482-1.458   c15.707,0,31.413,0,47.116,0c0,36.788,0,78.402,0,117.529C277.866,395.199,280.91,430.988,259.893,452.167z M470.696,409.917   c-2.674,39.884-35.243,61.063-79.17,61.188c-43.062,0.124-70.624-19.013-87.433-48.567c12.085-8.317,25.778-15.017,38.375-22.822   c10.08,15.761,27.537,30.91,53.429,28.652c16.131-1.406,34.856-14.555,24.285-34.482c-5.127-9.66-17.516-14.567-28.656-19.425   c-35.352-15.424-76.828-29.571-72.861-84.992c1.327-18.514,9.852-31.525,20.889-40.796c11.311-9.5,26.46-15.867,46.629-16.511   c36.629-1.173,56.723,15.12,70.429,37.884c-11.664,8.891-24.514,16.608-37.401,24.281c-4.229-12.995-24.644-25.658-41.772-17.969   c-7.789,3.493-14.788,13.761-10.684,26.224c3.66,11.115,18.589,17.199,30.599,22.344   C433.706,340.486,474.331,355.693,470.696,409.917z"
-          ></path>
-        </g>
-      </svg>
-    </div>
-    JavaScript
-    <input
-      type="radio"
-      name="status"
-      class="w-4 h-4 absolute accent-blue-500 right-3"
-      id="javascript"
-    />
-  </label>
+  <?php
+}
+  ?>
 </div>
 
   </section>
@@ -247,13 +244,14 @@ ob_start();
             </svg>
             <span class="sr-only">Add emoji</span>
         </button>
-        <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title of the article..."></textarea>
-            <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+        <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title of the article..." name="title"><?=$article["title"]?></textarea>
+        <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description of the article..." name="description"><?=$article["description"]?></textarea>
+            <!-- <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
             <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                 <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
             </svg>
             <span class="sr-only">Send message</span>
-        </button>
+        </button> -->
     </div>
 
    <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
@@ -335,14 +333,14 @@ ob_start();
        </div>
        <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
            <label for="editor" class="sr-only">Publish post</label>
-           <textarea id="editor" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article..." required ></textarea>
+           <textarea id="editor" name="content" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article..." required  ><?=$article["content"]?></textarea>
        </div>
    </div>
    <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-       update post
+       Publish post
    </button>
-   <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-       delete post
+   <a href ="index.php?action=deleteArticle&id=<?=$article["id"]?>" type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+       Delete post
    </button>
 </form>
 
