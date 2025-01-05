@@ -16,6 +16,9 @@ switch ($action) {
     case 'login':
         login();
         break;
+    case 'updateProfile':
+        editeProfile();
+        break;
     case 'SignUp':
         SignUp();
         break;

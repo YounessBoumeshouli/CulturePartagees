@@ -32,6 +32,9 @@ function ProfileView(){
     require_once("Views/$dir/profile.php");
 }
 function SettingsView(){
+    $id = $_SESSION["user"]["id_user"];
+    $user = new User(null, null, null, null, null, null, null,null);
+    $result = $user->viewProfile($id);
     $dir  = $_SESSION['user']['role'];
     $dir[0] = strtoupper($dir[0]);
     require_once("Views/$dir/settings.php");
@@ -63,6 +66,19 @@ function editeArticle(){
     $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
     $article = $Author->SelectArticle($id);
     require_once("Views/Author/editeArticle.php");
+}
+function editeProfile(){
+    $nom = $_POST["nom"];
+    $prenom = $_POST["prenom"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $password = $_POST["password"];
+    echo $nom,$prenom,$email,$phone;
+    $id = $_SESSION["user"]["id_user"];
+        $user = new User($nom, $prenom, $email, $password, $phone, null, null,Database::getConnection());
+     $user->UpdateProfile($id);
+    require_once("Views/Author/settings.php");
+    
 }
 function editArticleAction(){
     $id =  $_GET["idArticle"];

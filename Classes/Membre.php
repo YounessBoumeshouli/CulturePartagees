@@ -39,18 +39,8 @@ class Membre extends User{
     public function setPassword($password){
         $this->password = $password;
     }
-    public function UpdateProfile(){
-        $stmt = $this->pdo->prepare("UPDATE public.users
-	SET  nom=:nom, prénom=:prénom, email=:email, password=:password, phone=:phone
-	WHERE id=:id");
-        $stmt->bindParam(":nom",$this->nom);
-        $stmt->bindParam(":prénom",$this->prenom);
-        $stmt->bindParam(":email",$this->email);
-        $stmt->bindParam(":password",$this->password);
-        $stmt->bindParam(":phone",$this->phone);
-        $stmt->execute();
-
-    }
+    
+    
     public function addComment($membre_id , $comment , $article_id,$reaction){
         $react = 5;
         $stmt = $this->pdo->prepare("INSERT INTO public.avis(

@@ -39,7 +39,19 @@ require_once("Core/config/Database.php");
       return $result;
   }
     
+  public function UpdateProfile($id){
+   $stmt = $this->pdo->prepare("UPDATE public.users
+SET  nom=:nom, prénom = :prenom, email=:email, password=:password, phone=:phone
+WHERE id_user=:id");
+   $stmt->bindParam(":nom",$this->nom);
+   $stmt->bindParam(":prenom",$this->prenom);
+   $stmt->bindParam(":email",$this->email);
+   $stmt->bindParam(":password",$this->password);
+   $stmt->bindParam(":phone",$this->phone);
+   $stmt->bindParam(":id",$id);
+   $stmt->execute();
 
+}
  }
 
  //session_start();
