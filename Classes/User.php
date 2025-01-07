@@ -23,7 +23,6 @@ require_once("Core/config/Database.php");
         $this->pdo = Database::getConnection();
     }    
     public function  seConnecter(){
-       echo "hello";
        $stmt = $this->pdo->prepare("SELECT * from users where email = :email and password = :password");
        $stmt->bindParam(":email",$this->email);
        $stmt->bindParam(":password",$this->password);

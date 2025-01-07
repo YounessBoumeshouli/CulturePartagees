@@ -44,11 +44,9 @@ class Membre extends User{
     public function addComment($membre_id , $comment , $article_id,$reaction){
         $react = 5;
         $stmt = $this->pdo->prepare("INSERT INTO public.avis(
-	react, comment, rating, article_id , membre_id)
-	VALUES (:react, :comment, :rating, :article_id , :membre_id)");
-        $stmt->bindParam(":react",$reaction);
+	comment, article_id , membre_id)
+	VALUES ( :comment, :article_id , :membre_id)");
         $stmt->bindParam(":comment",$comment);
-        $stmt->bindParam(":rating",$react);
         $stmt->bindParam(":article_id",$article_id);
         $stmt->bindParam(":membre_id",$membre_id);
         $stmt->execute();

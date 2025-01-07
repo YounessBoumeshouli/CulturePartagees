@@ -1,8 +1,9 @@
 <?php
 $title = "article";
 ob_start();
+
 ?>
-<body class="font-body antialiased">
+<div class="font-body antialiased">
   <div class="flex justify-center" >
     <div class="max-w-2xl  rounded-lg bg-white px-8 py-4 shadow-md dark:bg-gray-800" id="card">
       <div class="flex items-center justify-between">
@@ -48,7 +49,7 @@ ob_start();
       </div>
   </div>
   <div class="flex justify-center mx-60 mt-6 mb-12 ">
-  <div class="bg-white border border-slate-200 grid grid-cols-6 gap-2 rounded-xl p-2 text-sm">
+  <div class="bg-white border border-slate-200 rounded-xl p-2 text-sm">
     <form method ="post" action="index.php?action=addComment&id_article=<?=$result["id_article"]?>">
     <h1 class="text-center text-slate-200 text-xl font-bold col-span-6">Send Feedback</h1>
     <textarea placeholder="Your feedback..." name="comment" class="bg-slate-100 text-slate-600 h-28 placeholder:text-slate-600 placeholder:opacity-50 border border-slate-200 col-span-6 resize-none outline-none rounded-lg p-2 duration-300 focus:border-slate-600"></textarea>
@@ -89,6 +90,7 @@ ob_start();
   <div>
     <div class="rounded-lg bg-gray-100 p-8 dark:bg-gray-800">
       <?php
+      
       foreach($Avis as $avis){
 
       
@@ -135,8 +137,61 @@ ob_start();
       console.log(reaction.value);
 
     })
+    
+    
+    
+    document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch(this.action, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Comment added!');
+
+
+            } else {
+                alert('Failed to add comment.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
+fetch('index.php?action=selectArticle&id=<?=$result["id_article"]?>')
+  .then(response => {
+    // Check if the response status is OK (status 200-299)
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Check if the response's content type is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Invalid Content-Type. Expected application/json.');
+    }
+
+    // Parse the response body as JSON
+    return response.json();
+  })
+  .then(data => {
+    // Handle the parsed JSON data
+    console.log('Received data:', data);
+  })
+  .catch(error => {
+    // Handle any errors (network, parsing, or validation errors)
+    console.error('Error fetching data:', error.message || error);
+  });
+
+
+
+
+// Call this function after a comment is added or when the page loads
   </script>
-</body>
+</div>
 <?php
 $content = ob_get_clean();
 require_once("Views/layoutMembre.php");

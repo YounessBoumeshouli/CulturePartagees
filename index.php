@@ -29,7 +29,12 @@ switch ($action) {
         homePage();
         break;
     case 'selectArticle':
-        ArticleView();
+       
+        if (isset($_GET['format']) && $_GET['format'] === 'json') {
+            ArticleJsonView();
+        } else {
+            ArticleView();
+        }
         break;
     case 'profile':
         ProfileView();

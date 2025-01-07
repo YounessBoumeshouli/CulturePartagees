@@ -1,14 +1,29 @@
 <?php
 $title = "profile";
 ob_start();
+$imageType = isset($result['mime_type']) ? $result['mime_type'] : 'image/jpeg'; 
+$imageData = isset($result['profile_image']) ? $result['profile_image'] : null;
+if (empty($imageData)) {
+    echo "No image data found!";
+}
+if ($imageData) {
+    if (is_resource($imageData)) {
+        $imageData = stream_get_contents($imageData);
+    }
+    
+    $imageDataEncoded = base64_encode($imageData);
+    $imageSrc = 'data:' . $imageType . ';base64,' . $imageDataEncoded; 
+} else {
+    
+    $imageSrc = 'path/to/default/image.jpg';
+}
 ?>
 <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
 <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
 
 <main class="profile-page">
   <section class="relative block h-500-px">
-    <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
-            background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');
+    <div class="absolute top-0 w-full h-full bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');
           ">
       <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
     </div>
@@ -25,7 +40,7 @@ ob_start();
           <div class="flex flex-wrap justify-center">
             <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
               <div class="relative">
-                <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
+                <img alt="..."  src="<?=$imageSrc?>" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
               </div>
             </div>
             <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
