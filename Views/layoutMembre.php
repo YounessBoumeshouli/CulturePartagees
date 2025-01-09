@@ -316,6 +316,33 @@
       </span>
       <span class="mx-2">Articles List</span>
     </a>
+    <span class="mx-5 text-gray-500 rtl:-scale-x-100 dark:text-gray-300">
+      <span class="w-24px h-24px h-5 w-5">
+        <svg class="w-[inherit] h-[inherit]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </span>
+    </span>
+    <a href="index.php?action=TagsList" class="-px-2 flex items-center text-gray-600 hover:underline dark:text-gray-200">
+      <span class="w-24px h-24px mx-2 h-6 w-6">
+        <svg
+          class="w-[inherit] h-[inherit]"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path>
+        </svg>
+      </span>
+      <span class="mx-2">Tags</span>
+    </a>
   </div>
   <?php
     }

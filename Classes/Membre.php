@@ -51,6 +51,7 @@ class Membre extends User{
         $stmt->bindParam(":membre_id",$membre_id);
         $stmt->execute();
 
+
     }
     public function EditComment($id , $comment , $avis){
         $stmt = $this->pdo->perpare("INSERT INTO public.avis(

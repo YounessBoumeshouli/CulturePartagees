@@ -66,5 +66,6 @@ class Author extends Membre{
            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
            return $result;
 
+           
     }
 }

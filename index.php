@@ -78,6 +78,9 @@ switch ($action) {
     case 'addCategorie':
         addCategorie();
         break;
+    case 'addTag':
+        addTag();
+        break;
     case 'authorsList':
         authorsList();
         break;
@@ -95,6 +98,9 @@ switch ($action) {
         break;
     case 'changestatus':
         changestatus();
+        break;
+    case 'TagsList':
+        TagsList();
         break;
    
     default:

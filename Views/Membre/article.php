@@ -153,43 +153,17 @@ ob_start();
         .then(data => {
             if (data.success) {
                 alert('Comment added!');
-
+console.log('fqc');
 
             } else {
                 alert('Failed to add comment.');
             }
+            console.log('fqc');
+
         })
         .catch(error => console.error('Error:', error));
 });
-fetch('index.php?action=selectArticle&id=<?=$result["id_article"]?>')
-  .then(response => {
-    // Check if the response status is OK (status 200-299)
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
 
-    // Check if the response's content type is JSON
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new Error('Invalid Content-Type. Expected application/json.');
-    }
-
-    // Parse the response body as JSON
-    return response.json();
-  })
-  .then(data => {
-    // Handle the parsed JSON data
-    console.log('Received data:', data);
-  })
-  .catch(error => {
-    // Handle any errors (network, parsing, or validation errors)
-    console.error('Error fetching data:', error.message || error);
-  });
-
-
-
-
-// Call this function after a comment is added or when the page loads
   </script>
 </div>
 <?php

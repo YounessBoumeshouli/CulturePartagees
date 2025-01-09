@@ -14,9 +14,16 @@ class Admin extends User{
     }
     public function creeCategorie($nom){
         $stmt = $this->pdo->prepare("INSERT INTO public.categories(
-	nom)
-	VALUES (:nom)");
-    $stmt->bindParam(":nom",$nom);
+	label)
+	VALUES (:label)");
+    $stmt->bindParam(":label",$nom);
+    $stmt->execute();
+    }
+    public function creeTag($tag){
+        $stmt = $this->pdo->prepare("INSERT INTO public.tags(
+	label_tag)
+	VALUES (:label_tag)");
+    $stmt->bindParam(":label_tag",$tag);
     $stmt->execute();
     }
     public function DescriptionCategorie($id,$discription){

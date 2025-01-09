@@ -5,6 +5,7 @@ include("Classes/Categories.php");
 include("Classes/Author.php");
 include("Classes/Articles.php");
 include("Classes/Avis.php");
+include("Classes/tags.php");
 session_start();
 function inscriptionAction(){
     require_once("Views/Authentification/login.php");
@@ -15,78 +16,19 @@ function registrationAction(){
 function HomeViwe(){
     require_once("Views/Membre/home.php");
 }
-// function ArticleView() {
-//     $id = $_GET["id"];
-//     $article = new Articles(Database::getConnection());
-//     $avis = new Avis(Database::getConnection());
-//     $result = $article->afficherArticle($id);
-//     $Avis = $avis->afficherAvis($id);
-
-//     if (isset($_GET['format']) && $_GET['format'] === 'json') {
-//         header('Content-Type: application/json');
-//         echo json_encode(['article' => $result, 'avis' => $Avis]);
-//         return; // Stop script after sending JSON
-//     }
-
-//     require_once("Views/Membre/article.php");
-// }
-function ArticleView() {
+function ArticleView(){
     $id = $_GET["id"];
     $article = new Articles(Database::getConnection());
     $avis = new Avis(Database::getConnection());
-
     $result = $article->afficherArticle($id);
     $Avis = $avis->afficherAvis($id);
-
-    // Sanitize data
-    $result = cleanData($result);
-    $Avis = array_map('cleanData', $Avis);
-
-    var_dump($result, $Avis);
-    
-    // Check if it's an AJAX request
-    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-        // Prepare JSON response
-        header('Content-Type: application/json'); // Ensure this is at the top before output
-        $response = json_encode(['article' => $result, 'avis' => $Avis]);
-        
-        if ($response === false) {
-            echo json_encode(['error' => json_last_error_msg()]);
-            return;
-        }
-        echo $response;
-        
-        // Stop further execution
-    }
     require_once("Views/Membre/article.php");
-
 }
-
-
-// Helper function to sanitize data
-function cleanData($data) {
-    if (is_array($data)) {
-        return array_map('cleanData', $data);
-    } elseif (is_object($data)) {
-        return array_map('cleanData', get_object_vars($data));
-    } elseif (is_resource($data)) {
-        return null; // Remove resources
-    }
-    return $data;
-}
-
-
-
-function ArticleJsonView() {
-    $id = $_GET["id"];
-    $article = new Articles(Database::getConnection());
-    $avis = new Avis(Database::getConnection());
-
-    $result = $article->afficherArticle($id);
-    $Avis = $avis->afficherAvis($id);
-
-    header('Content-Type: application/json');
-    echo json_encode(['article' => $result, 'avis' => $Avis]);
+function TagsList(){
+    
+    $tags = new Tags(Database::getConnection());
+    $result = $tags->afficherLesTag();
+    require_once("Views/Admin/tagsList.php");
 }
 function ProfileView(){
     $id = $_SESSION["user"]["id_user"];
@@ -231,6 +173,13 @@ function addCategorie(){
         $categorie = $_POST["categorie"];
        $admin = new Admin($_SESSION['user']['nom'],$_SESSION['user']['prénom'],$_SESSION['user']['email'],$_SESSION['user']['password'],$_SESSION['user']["phone"],null,$_SESSION['user']["registrationdate"],null);
        $admin->creeCategorie($categorie);
+    }
+}
+function addTag(){
+    if(isset($_POST["tag"])){
+        $tag = $_POST["tag"];
+       $admin = new Admin($_SESSION['user']['nom'],$_SESSION['user']['prénom'],$_SESSION['user']['email'],$_SESSION['user']['password'],$_SESSION['user']["phone"],null,$_SESSION['user']["registrationdate"],null);
+       $admin->creeTag($tag);
     }
 }
 function deleteArticle(){
