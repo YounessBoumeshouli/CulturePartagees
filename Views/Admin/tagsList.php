@@ -25,10 +25,10 @@ ob_start();
   <div class="w-[50px] h-[50px] ml-2.5 rounded-[10px] bg-gradient-to-br from-gray-300 via-gray-400 to-indigo-400 hover:from-indigo-400 hover:to-red-700 transition duration-500"></div>
   <div class="ml-2.5 text-white font-sans w-[calc(100%-90px)]">
     <div class="flex items-center justify-between">
-      <p class="text-lg font-bold">Clans of Clash</p>
+      <p class="text-lg font-bold"><?=$row["label_tag"]?></p>
       <span class="text-[10px]">12 min ago</span>
     </div>
-    <p class="text-sm font-light">Xhattmahs is not attacking your base!</p>
+    
   </div>
 </div>
 
@@ -36,7 +36,7 @@ ob_start();
 <?php
 }
 ?>
-
+</div>
 
 
 <script>

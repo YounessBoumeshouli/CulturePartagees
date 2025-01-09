@@ -9,6 +9,7 @@ ob_start();
 </head>
 <body class="bg-gray-900 h-screen flex items-center justify-center flex-wrap">
 <?php
+var_dump($result);
 foreach ($result as $row) {
   # code...
 ?>
@@ -21,7 +22,8 @@ foreach ($result as $row) {
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
       </div>
-    </a></span>
+    </a>
+  </span>
 
   </div>
   <div class="flex flex-col gap-5 p-2 pt-5">

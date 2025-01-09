@@ -51,20 +51,50 @@ function likedArticles(){
     require_once("Views/Membre/likedArticles.php");
 }
 function addArticle(){
-
+    $tag = new Tags(Database::getConnection());
+    $tags = $tag->afficherLesTag();
     $categorie = new Categories(Database::getConnection());
     $categories= $categorie->afficherCategories();
     require_once("Views/Author/addArticle.php");
 }
-function ajouterArticleAction(){
+function ajouterArticleAction() {
+    // Debugging: Check if selected_tags is set
+    if (isset($_POST["selected_tags"])) {
+        echo "Selected Tags: " . $_POST["selected_tags"] . "<br>";
+    } else {
+        echo "No tags selected.<br>";
+    }
+
     echo "hola";
-if(isset($_POST["content"],$_POST["title"],$_POST["categorie"])){
-   $content =  $_POST["content"];
-   $title =  $_POST["title"];
-   $categorie =  $_POST["categorie"];
-    $Author = new Author($_SESSION["user"]["nom"], $_SESSION["user"]["prénom"], $_SESSION["user"]["email"], $_SESSION["user"]["password"], $_SESSION["user"]["phone"], $_SESSION["user"]["role"], $_SESSION["user"]["registrationdate"],Database::getConnection()) ;
-    $Author->addArticle($categorie,$title,$content,$_SESSION["user"]["id_user"]);
-}
+
+    if (isset($_POST["content"], $_POST["title"], $_POST["categorie"])) {
+        $content = $_POST["content"];
+        $title = $_POST["title"];
+        $categorie = $_POST["categorie"];
+        $selectedTags = isset($_POST["selected_tags"]) ? $_POST["selected_tags"] : ''; // Get selected tags
+
+        $Author = new Author(
+            $_SESSION["user"]["nom"],
+            $_SESSION["user"]["prénom"],
+            $_SESSION["user"]["email"],
+            $_SESSION["user"]["password"],
+            $_SESSION["user"]["phone"],
+            $_SESSION["user"]["role"],
+            $_SESSION["user"]["registrationdate"],
+            Database::getConnection()
+        );
+      $row =   $Author->addArticle($categorie, $title, $content, $_SESSION["user"]["id_user"]);
+      $article_id =   $row["id_article"];
+    var_dump($row);
+        if (!empty($selectedTags)) {
+            $tagsArray = explode(',', $selectedTags); // Convert comma-separated string to array
+            $tags = new Tags(Database::getConnection());
+            foreach ($tagsArray as $tagId) {
+                
+                $tags->insertIntoTagArticles($tagId,$article_id);
+            }
+        }
+    }
 }
 function editeArticle(){
     $categorie = new Categories(Database::getConnection());
@@ -130,6 +160,13 @@ function memebersList(){
     $result = $Membre->SelectUsersByRole($role);
     require_once("Views/Admin/MemebersList.php");
 }
+function commentsList(){
+    $role = "Membre";
+    $avis = new Avis(Database::getConnection());
+    $result = $avis-> afficherAllComment(); 
+    require_once("Views/Admin/CommentsList.php");
+}
+
 function login(){
     if(isset($_POST["email"],$_POST["password"])){
         $email = $_POST["email"];

@@ -84,6 +84,9 @@ switch ($action) {
     case 'authorsList':
         authorsList();
         break;
+    case 'commentsList':
+        commentsList();
+        break;
     case 'memebersList':
         memebersList();
         break;

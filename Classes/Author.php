@@ -10,7 +10,7 @@ class Author extends Membre{
         $date =date("Y-m-d");
         $stmt = $this->pdo->prepare("INSERT INTO public.articles(
 	 title, content, categorie_id, auteur_id, creationdate, modificationdate)
-	VALUES ( :title ,:content, :categorie_id, :auteur_id, :creationdate,:modificationdate)");
+	VALUES ( :title ,:content, :categorie_id, :auteur_id, :creationdate,:modificationdate) RETURNING id_article");
            $stmt->bindParam(":title",$title);
            $stmt->bindParam(":content",$content);
            $stmt->bindParam(":categorie_id",$categorie_id);
@@ -18,6 +18,9 @@ class Author extends Membre{
            $stmt->bindParam(":creationdate",$date);
            $stmt->bindParam(":modificationdate",$date);
            $stmt->execute();
+          $row =  $stmt->fetch(PDO::FETCH_ASSOC);
+          return $row;
+
     }
     public function EditArticle($id,$title,$description,$content,$categorie_id){
         $modificationdate =date("Y-m-d");
@@ -43,9 +46,9 @@ class Author extends Membre{
 
     }
     public function SelectArticle($id){
-        $stmt = $this->pdo->prepare("SELECT * from  public.articles
-	where id_article = :id_article");
-           $stmt->bindParam(":id_article",$id);
+        $stmt = $this->pdo->prepare("SELECT * FROM public.articles a left join articles_tags ar on ar.id_a =  a.id_article left join tags t on
+t.id_tag = ar.id_t where ar.id_a = :id_a");
+           $stmt->bindParam(":id_a",$id);
            $stmt->execute();
            $result = $stmt->fetch(PDO::FETCH_ASSOC);
            return $result;

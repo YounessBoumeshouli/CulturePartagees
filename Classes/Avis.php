@@ -13,6 +13,13 @@ class Avis {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+        }
+
+    public function afficherAllComment(){
+        $stmt = $this->pdo->prepare("select * from public.Avis a left join public.users u on a.membre_id = u.id_user ");
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
     
     
