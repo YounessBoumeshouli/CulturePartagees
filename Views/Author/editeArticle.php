@@ -1,7 +1,6 @@
 <?php
 $title = "add Articles";
 ob_start();
-var_dump($article);
 ?>
 <body class="font-body antialiased">
   <div class="flex items-center overflow-x-auto whitespace-nowrap py-4 ml-8">
@@ -182,8 +181,6 @@ var_dump($article);
   <legend class="text-xl font-semibold mb-3 select-none">Choose One</legend>
   <?php
 foreach ($categories as $categorie) {
-  # code...
-
   ?>
   <label
     for="html"

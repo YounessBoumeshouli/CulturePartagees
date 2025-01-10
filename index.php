@@ -66,9 +66,6 @@ switch ($action) {
     case 'reffuseArticle':
         reffuseArticle();
         break;
-    case 'articles':
-        articles();
-        break;
     case 'ArticlesList':
         articleList();
         break;

@@ -4,7 +4,7 @@ ob_start();
 ?>
 
 <section>
-    <form method="post" action="index.php?action=ajouterArticle">
+    <form method="post" action="index.php?action=ajouterArticle" enctype="multipart/form-data">
         <div class="container mx-auto px-6 py-10">
             <h2 class="text-3xl font-semibold capitalize text-gray-800 lg:text-4xl dark:text-white">From the blog</h2>
         </div>
@@ -36,6 +36,35 @@ ob_start();
         </div>
         <input type="hidden" name="selected_tags" id="selected-tags" value="">
 
+        <!-- Image Upload Section -->
+        <div class="relative my-6" id="imageContainer">
+            <img id="articleImage" src="path/to/default/image.jpg" class="h-48 w-full object-cover rounded-lg" alt="Article Image">
+            <div onclick="toggleEdit()" class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 cursor-pointer">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+            </div>
+        </div>
+        <div class="hidden relative" id="uploadContainer">
+            <div class="border-2 border-dashed border-gray-300 rounded-lg h-48 w-full flex flex-col items-center justify-center">
+                <input type="file" id="fileInput" class="hidden" name="image" accept="image/*" onchange="handleFileChange(this)">
+                <label for="fileInput" class="cursor-pointer">
+                    <div class="text-center">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" 
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <p class="mt-1 text-sm text-gray-600">Click to upload image</p>
+                    </div>
+                </label>
+            </div>
+            <div onclick="toggleEdit()" class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 cursor-pointer">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+        </div>
+
         <!-- Rest of your form elements -->
         <label for="chat" class="sr-only">Title of the article</label>
         <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
@@ -64,30 +93,52 @@ ob_start();
     <script>
         const selectedTags = new Set();
 
-document.querySelectorAll('.tag-button').forEach(button => {
-    button.addEventListener('click', () => {
-        const tagId = button.dataset.id;
+        document.querySelectorAll('.tag-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tagId = button.dataset.id;
 
-        // Toggle selection
-        if (selectedTags.has(tagId)) {
-            selectedTags.delete(tagId);
-            button.classList.remove('bg-blue-500'); // Example visual feedback
-        } else {
-            selectedTags.add(tagId);
-            button.classList.add('bg-blue-500'); // Example visual feedback
+                // Toggle selection
+                if (selectedTags.has(tagId)) {
+                    selectedTags.delete(tagId);
+                    button.classList.remove('bg-blue-500'); // Example visual feedback
+                } else {
+                    selectedTags.add(tagId);
+                    button.classList.add('bg-blue-500'); // Example visual feedback
+                }
+
+                // Update the hidden input field
+                document.getElementById('selected-tags').value = Array.from(selectedTags).join(',');
+                console.log("Selected Tags:", document.getElementById('selected-tags').value);
+            });
+        });
+
+        // Ensure the hidden input is updated before form submission
+        document.querySelector('form').addEventListener('submit', function (event) {
+            document.getElementById('selected-tags').value = Array.from(selectedTags).join(',');
+            console.log("Form submitted with selected tags:", document.getElementById('selected-tags').value);
+        });
+
+        // Image Upload Script
+        function toggleEdit() {
+            const imageContainer = document.getElementById('imageContainer');
+            const uploadContainer = document.getElementById('uploadContainer');
+            
+            imageContainer.classList.toggle('hidden');
+            uploadContainer.classList.toggle('hidden');
         }
 
-        // Update the hidden input field
-        document.getElementById('selected-tags').value = Array.from(selectedTags).join(',');
-        console.log("Selected Tags:", document.getElementById('selected-tags').value);
-    });
-});
-
-// Ensure the hidden input is updated before form submission
-document.querySelector('form').addEventListener('submit', function (event) {
-    document.getElementById('selected-tags').value = Array.from(selectedTags).join(',');
-    console.log("Form submitted with selected tags:", document.getElementById('selected-tags').value);
-});
+        function handleFileChange(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    document.getElementById('articleImage').src = e.target.result;
+                    toggleEdit();
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 </section>
 

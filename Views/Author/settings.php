@@ -18,7 +18,6 @@ if ($imageData) {
     $imageSrc = 'path/to/default/image.jpg';
 }
 ?>
-?>
 <form action="index.php?action=updateProfile" method="post" enctype="multipart/form-data">
   <section class="min-h-screen bg-white dark:bg-gray-900">
     <div class="container mx-auto px-6">

@@ -1,5 +1,5 @@
 <?php
-require_once("Core/config/Database.php");
+require_once 'C:/laragon/www/CulturePartagees/Core/config/Database.php';
 class Articles {
     private $id;
     private $title;

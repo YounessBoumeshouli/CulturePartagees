@@ -1,9 +1,10 @@
 <?php
-require_once("Core/config/Database.php");
+require_once 'C:/laragon/www/CulturePartagees/Core/config/Database.php';
 class Avis {
     
     private $pdo;
     
+
     public function __construct($pdo){
         $this->pdo = Database::getConnection();
     }

@@ -1,6 +1,6 @@
 <?php
-require_once("Core/config/Database.php");
- class User{
+require_once 'C:/laragon/www/CulturePartagees/Core/config/Database.php';
+class User{
     protected $nom;
     protected $prenom;
     protected $email;
@@ -21,11 +21,11 @@ require_once("Core/config/Database.php");
         $this->role = $role;
         $this->registrationDate = $registrationDate;
         $this->pdo = Database::getConnection();
-    }    
+    }
+
     public function  seConnecter(){
-       $stmt = $this->pdo->prepare("SELECT * from users where email = :email and password = :password");
+       $stmt = $this->pdo->prepare("SELECT * from users where email = :email ");
        $stmt->bindParam(":email",$this->email);
-       $stmt->bindParam(":password",$this->password);
        $stmt->execute();
        $result = $stmt->fetch(PDO::FETCH_ASSOC);
        return $result;

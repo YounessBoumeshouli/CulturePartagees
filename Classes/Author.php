@@ -6,21 +6,36 @@ class Author extends Membre{
     public function __construct($nom, $prenom, $email, $password, $phone, $role, $registrationDate,$pdo) {        
         parent::__construct( $nom, $prenom, $email, $password, $phone, $role, $registrationDate,$pdo);
     }
-    public function addArticle($categorie_id,$title,$content,$auteur_id){
-        $date =date("Y-m-d");
-        $stmt = $this->pdo->prepare("INSERT INTO public.articles(
-	 title, content, categorie_id, auteur_id, creationdate, modificationdate)
-	VALUES ( :title ,:content, :categorie_id, :auteur_id, :creationdate,:modificationdate) RETURNING id_article");
-           $stmt->bindParam(":title",$title);
-           $stmt->bindParam(":content",$content);
-           $stmt->bindParam(":categorie_id",$categorie_id);
-           $stmt->bindParam(":auteur_id",$auteur_id);
-           $stmt->bindParam(":creationdate",$date);
-           $stmt->bindParam(":modificationdate",$date);
-           $stmt->execute();
-          $row =  $stmt->fetch(PDO::FETCH_ASSOC);
-          return $row;
-
+    public function addArticle($categorie_id, $title, $content, $auteur_id, $imageData = null) {
+        $date = date("Y-m-d");
+        
+        $stmt = $this->pdo->prepare("
+            INSERT INTO public.articles (
+                title, content, categorie_id, auteur_id, creationdate, modificationdate, article_image
+            ) VALUES (
+                :title, :content, :categorie_id, :auteur_id, :creationdate, :modificationdate, :article_image
+            ) RETURNING id_article
+        ");
+        $stmt->bindParam(":title", $title);
+        $stmt->bindParam(":content", $content);
+        $stmt->bindParam(":categorie_id", $categorie_id);
+        $stmt->bindParam(":auteur_id", $auteur_id);
+        $stmt->bindParam(":creationdate", $date);
+        $stmt->bindParam(":modificationdate", $date);
+        
+        // Handle binary image data
+        if ($imageData !== null) {
+            $stmt->bindParam(":article_image", $imageData, PDO::PARAM_LOB); // Use PDO::PARAM_LOB for binary data
+        } else {
+            $stmt->bindValue(":article_image", null, PDO::PARAM_NULL); // Bind NULL if no image is provided
+        }
+        
+        // Execute the query
+        $stmt->execute();
+        
+        // Fetch the inserted article ID
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
     }
     public function EditArticle($id,$title,$description,$content,$categorie_id){
         $modificationdate =date("Y-m-d");

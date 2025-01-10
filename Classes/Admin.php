@@ -35,11 +35,33 @@ class Admin extends User{
     }
     
     
-    public function DeleteComment($id){
-        $stmt = $this->pdo->perpare("DELETE from public.avis where id =:id ");
-        $stmt->bindParam(":article_id",$id);
-        $stmt->execute();
-
+    public function DeleteComment($id) {
+        try {
+            // Validate input
+            if (!is_numeric($id) || $id <= 0) {
+                throw new InvalidArgumentException("Invalid comment ID");
+            }
+    
+            // Prepare and execute the SQL query
+            $stmt = $this->pdo->prepare("DELETE FROM public.avis WHERE id_comment = :id_comment");
+            $stmt->bindParam(":id_comment", $id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            // Check if any rows were affected
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log the error (optional)
+            error_log("Error deleting comment: " . $e->getMessage());
+    
+            // Return false to indicate failure
+            return false;
+        } catch (InvalidArgumentException $e) {
+            // Log the error (optional)
+            error_log("Invalid input: " . $e->getMessage());
+    
+            // Return false to indicate failure
+            return false;
+        }
     }
     public function ChangeStatus($id){
         $search = $this->pdo->prepare("SELECT * from public.users   where id_user =:id_user ");
